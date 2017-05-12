@@ -68,7 +68,7 @@ public class ObrasDeArteDao{
                 valor = rs.getInt("valor");
                 obra.setValor(valor);
                 
-                nombreA = rs.getString("nombreAr");
+                nombreA = rs.getString("nombre");
                 obra.setNombreA(nombreA);
 	        
 	        obras.add(obra);
@@ -97,7 +97,7 @@ public class ObrasDeArteDao{
             } catch (URISyntaxException ex) {
                 Logger.getLogger(ObrasDeArteDao.class.getName()).log(Level.SEVERE, null, ex);
             }
-	    String query = "insert into Obra_de_Arte (nombre,descripcion,estilo,valor,nombreAr)"  + " values (?,?,?,?,?)";
+	    String query = "insert into Obra_de_Arte (nombreO,descripcion,estilo,valor,nombre)"  + " values (?,?,?,?,?)";
         PreparedStatement preparedStmt=null;
 	    try {
 			preparedStmt = connection.prepareStatement(query);
@@ -113,4 +113,5 @@ public class ObrasDeArteDao{
 		}
 		return result;
 	}
+
 }
