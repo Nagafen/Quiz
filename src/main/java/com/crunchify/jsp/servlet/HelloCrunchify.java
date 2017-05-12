@@ -1,7 +1,7 @@
 package com.crunchify.jsp.servlet;
  
-import edu.co.sergio.mundo.dao.DepartamentoDAO;
-import edu.co.sergio.mundo.vo.Departamento;
+import edu.co.sergio.mundo.dao.ObrasDeArteDao;
+import edu.co.sergio.mundo.vo.ObraArte;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,20 +17,30 @@ import javax.servlet.RequestDispatcher;
 public class HelloCrunchify extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // reading the user input
-        String id = request.getParameter("id");
-        String nombre = request.getParameter("nombre");
+        
+        
+        String nombreO = request.getParameter("nombreO");
+        String descrip = request.getParameter("descripcion");
+        String estilo = request.getParameter("estilo");
+        int valor = Integer.valueOf(request.getParameter("valor"));
+        String nombreA = request.getParameter("nombreA");
         
         //Se debe incluir validaciones - Lo recuerda: Gestion de Excepciones.
-        DepartamentoDAO dao = new DepartamentoDAO();
         
-        Departamento departamento = new Departamento();
-        departamento.setId_departamento(Integer.parseInt(id));
-        departamento.setNom_departamento(nombre);
-        dao.insert(departamento);
+        ObrasDeArteDao ADAO = new ObrasDeArteDao();
+        
+        ObraArte obra = new ObraArte();
+        obra.setNombreO(nombreO);
+        obra.setDescripcion(descrip);
+        obra.setEstilo(estilo);
+        obra.setValor(valor);
+        obra.setNombreA(nombreA);
+        
+        ADAO.InsertarObraDeArte(obra);
         
         //Listando la informacion  
-        List<Departamento> departamentos =  dao.findAll();
-        request.setAttribute("departamentos", departamentos);
+        List<ObraArte> obras =  ADAO.findAll();
+        request.setAttribute("obras", obras);
        
        
         //Redireccionando la informacion
